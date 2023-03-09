@@ -1,0 +1,85 @@
+.wrapper {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.form {
+ margin-top: -1.41rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+}
+
+.form > input {
+  flex: 1;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #0d0d0d;  
+  background: #262626;
+}
+
+.form > button {
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #f2f2f2;
+  display: flex;
+  background: #1E6F9F;
+  border-radius: 8px;
+  gap: 0.5rem;
+  border: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.listWrapper {
+  margin-top: 4rem;
+}
+
+.listWrapper header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.emptyListWrapper {
+  border-top: 1px solid #333333;
+  border-radius: 8px;
+  padding: 4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #333333;
+}
+
+.emptyListWrapper p {
+  color: #808080;
+}
+
+.emptyListWrapper svg {
+  margin-bottom: 1rem;
+}
+
+.createdTasks {
+ color: #4EA8DE;
+ font-weight: 700;
+ font-size: 0.875rem;
+}
+
+.doneTasks {
+ color: #8284FA;
+ font-weight: 700;
+ font-size: 0.875rem; 
+}
+
+.quantityOfTasks {
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background-color: #333333;
+  color: #d9d9d9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 0.5rem;
+}

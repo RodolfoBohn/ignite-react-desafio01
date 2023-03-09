@@ -1,34 +1,77 @@
+import { ChangeEvent, FormEvent, useState } from "react";
+import { PlusCircle } from "@phosphor-icons/react";
+
+import { List } from "./components/List";
+import { TaskType } from "./components/Task";
+import { Header } from "./components/Header";
+
 import styles from "./App.module.css";
-import { PlusCircle, ClipboardText } from "@phosphor-icons/react";
-import { Header } from "./components/header";
+
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  const [taskList, setTaskList] = useState<TaskType[]>([]);
+  const [taskContent, setTaskContent] = useState("");
+
+  function handleTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    setTaskContent(event.target.value);
+  }
+
+  function handleTaskSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const newTask: TaskType = {
+      id: uuidv4(),
+      content: taskContent,
+      isDone: false,
+    };
+
+    setTaskList((state) => {
+      return [...state, newTask];
+    });
+
+    setTaskContent("");
+  }
+
+  function onUpdateTaskStatus(updatedTaskId: string) {
+    setTaskList((state) => {
+      return state.map((task) => {
+        if (task.id === updatedTaskId) {
+          return {
+            ...task,
+            isDone: !task.isDone,
+          };
+        } else return task;
+      });
+    });
+  }
+
+  function onDeleteTask(deletedTaskId: string) {
+    setTaskList((state) => {
+      return state.filter((task) => task.id !== deletedTaskId);
+    });
+  }
+
   return (
     <>
       <Header />
       <div className={styles.wrapper}>
-        <form className={styles.form}>
-          <input placeholder="Adicione uma nova tarefa"></input>
-          <button>
+        <form className={styles.form} onSubmit={handleTaskSubmit}>
+          <input
+            placeholder="Adicione uma nova tarefa"
+            value={taskContent}
+            onChange={handleTaskChange}
+            required
+          ></input>
+          <button type="submit" disabled={taskContent.length === 0}>
             Criar <PlusCircle size={16} />
           </button>
         </form>
-
-        <div className={styles.listWrapper}>
-          <header>
-            <span className={styles.createdTasks}>
-              Tarefas criadas <span className={styles.quantityOfTasks}>0</span>
-            </span>
-            <span className={styles.doneTasks}>
-              Concluídas <span className={styles.quantityOfTasks}>0</span>
-            </span>
-          </header>
-          <div className={styles.emptyListWrapper}>
-            <ClipboardText size={56} />
-            <p>Você ainda não tem tarefas concluídas</p>
-            <p>Crie tarefas e organize seus itens a fazer</p>
-          </div>
-        </div>
+        <List
+          tasks={taskList}
+          onUpdateTaskStatus={onUpdateTaskStatus}
+          onDeleteTask={onDeleteTask}
+        />
       </div>
     </>
   );

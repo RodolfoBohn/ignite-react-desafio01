@@ -1,0 +1,62 @@
+.taskWrapperBase {
+  display: flex;
+  padding: 1rem;
+  border-radius: 8px;
+  align-items: flex-start;
+  
+
+}
+
+.taskWrapperDefault {
+  background: #454545;
+  border: 1px solid #333333;
+  color: #F2F2F2;
+}
+
+.taskWrapperDone {
+  background: #262626;
+  border: none;
+  color: #808080;
+  text-decoration: line-through;
+}
+
+.task {
+  flex: 1;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.task input[type="checkbox"] {
+  appearance: none;
+
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 2px solid #4EA8DE;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.task input[type="checkbox"]:checked {
+  border-color: #9747FF;
+  background:#9747FF;
+  color: #F2F2F2;
+  position: relative;
+
+}
+
+.task input[type="checkbox"]:checked::before{
+  content: '✓';
+  position: absolute;
+  top:0;
+  left: 4px;
+}
+
+.taskWrapperBase button {
+  line-height: 0;
+  border:0;
+  background: transparent; 
+  margin-left: 0.75rem;
+  cursor: pointer;
+}
